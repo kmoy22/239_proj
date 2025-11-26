@@ -1,8 +1,11 @@
+
 %EE239AS
 
 %Project Ray Tracing 
 
-clc; clear all; close all; rng('shuffle');
+clc;
+close all;
+clear all;
 
 %Siteviewer of the court of sciences
 %Lat from 34.067076 to 34.07003
@@ -14,8 +17,8 @@ viewer = siteviewer(Buildings=Court_of_Science);
 tx_lat = 34.06945;
 tx_lon = -118.4425;
 tx_ant_height = 10;
-tx_power = 1; %dB check
-tx_freq = 6*10^9; %Hz
+tx_power = 1;%dB check
+tx_freq = 6*10^9;%Hz
 
 %interesting tx spot: tx_lat = 34.06945; tx_lon = -118.4435;
 %Move tx_lon from -118.4425 to -118.4419
@@ -29,8 +32,8 @@ tx = txsite(Latitude = tx_lat, ...
 
 %rx initial values
 rx_lat = 34.0677;
-rx_lon = -118.441;
-rx_ant_height = 5;
+rx_lon = -118.44225;
+rx_ant_height = 10;
 
 %leave rx for now
 %can move rx_lon from -118.4425 to -118.4419
@@ -174,3 +177,6 @@ xlabel('Propagation Distance (m)');
 ylabel('Path loss (dB)');
 
 %now add MLP to predict los pathloss with distance from tx to rx
+%first put data in a csv
+
+writetable(results, 'pathloss_data.csv');
