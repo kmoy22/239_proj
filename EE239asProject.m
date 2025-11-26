@@ -180,3 +180,17 @@ ylabel('Path loss (dB)');
 %first put data in a csv
 
 writetable(results, 'pathloss_data.csv');
+
+%try to capture all data for all the rays
+ray_num = numel(pathloss_points);
+
+all_ray_structs = {};
+
+for i = 1:ray_num
+    rays = pathloss_points{i};
+    ray_struct = arrayfun(@(r) struct(r), rays, "UniformOutput", false);
+    all_ray_structs = [all_ray_structs; ray_struct(:)];
+end
+
+all_ray_structs = vertcat(all_ray_structs{:});
+writetable(struct2table(all_ray_structs),'full_ray_data.csv');
